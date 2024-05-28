@@ -49,13 +49,14 @@ public class Main {
               System.out.println("Digite a opção:");
               inputMenu = Integer.parseInt(System.console().readLine());
               if(inputMenu == 1){
+                //RESERVAR FEITO POR LeticiaMoraesG - Letícia
+                  
                 System.out.println("\nServicos Publicados:");
                 for(Servico servico : publicarServico.getServicosPublicados())
                 System.out.print(servico.getNome() + "\n");
                 System.out.println("\nDigite o nome do servico: ");
                 String inputservico = System.console().readLine();
-            //input serviço
-                
+                //Faz uma lista de prestadores com o serviço buscado
             List<Prestador> prestadoresServico = reservar.PrestadoresComServico(inputservico, usuario);
             System.out.println("\nLista de prestadores: ");
             for(Prestador prestador : prestadoresServico){
@@ -63,10 +64,10 @@ public class Main {
             }
             System.out.println("\nDigite o nome do prestador: ");
             String inputPrestador = System.console().readLine();
-            
-            //input nome do prestador
+            // Acha o prestador escolhido na lista de prestadores 
             Prestador prestadorescolhido = reservar.acharPrestador(inputPrestador, usuario);
                 Servico servicoEscolhido = reservar.buscarServico(inputservico, prestadorescolhido);
+                  //Mostra as datas disponíveis do serviço
                 System.out.println("\nDatas disponíveis: ");
                 reservar.mostrarDatasDisponiveis(inputservico, prestadorescolhido);
                     System.out.println("\nDigite a data: ");
@@ -74,6 +75,7 @@ public class Main {
                     Data dataescolhida = reservar.acharData(inputData, inputservico, prestadorescolhido);
                     
                       if(dataescolhida != null){ 
+                        //Mostra os horários disponíveis da data
                         System.out.println("\nHorários Disponíveis: ");
                         reservar.mostrarHorariodisponiveis(inputservico, dataescolhida, prestadorescolhido);
                         System.out.println("\nDigite o horario: ");
@@ -81,11 +83,12 @@ public class Main {
                         Horario horarioescolhido = dataescolhida.buscarHorarioDisponivel(inputHorario);
                         
                         if(horarioescolhido != null){
-                          //fazer o pagamento
+                          //Fazer o pagamento
                           System.out.println("\nÁ pagar: "+ servicoEscolhido.getValor()+ "\n\nFormas de pagamento:\nCartão\nPix");
                           System.out.println("\nDigite a forma de pagamento: ");
                           String formaPagamento = System.console().readLine();
-                          
+
+                            //Reservar
                            reservar.criarReserva(contratante, prestadorescolhido, servicoEscolhido, dataescolhida, horarioescolhido, formaPagamento);
                         }
                       }
