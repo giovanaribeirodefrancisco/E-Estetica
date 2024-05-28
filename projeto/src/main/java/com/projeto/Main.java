@@ -141,6 +141,7 @@ public class Main {
                   String inputservico = System.console().readLine(); //Define o serviço prestado
                   System.out.println("\nDigite o valor: ");
                   float valor = Float.parseFloat(System.console().readLine()); //Define o valor do serviço
+                 //Adiciona o serviço ao serviços do prestador
                   publicarServico.adicionarServico(inputservico, valor, prestador);
                   System.out.println("\nDigite a quantidade de dias: "); 
                   int inputDias = Integer.parseInt(System.console().readLine()); // A quantidade de dias disponíveis
@@ -154,7 +155,7 @@ public class Main {
                   System.out.println("\nDigite o horario de fim (00:00): ");
                   String inputHorarioFim = System.console().readLine();
                       
-                  //Adiciona as Datas e Horários definidos dentro da Agenda
+                  //Adiciona as Datas e Horários definidos dentro da Agenda do serviço
                   publicarServico.adicionarData(inputData, inputHorario, inputHorarioFim, inputservico, prestador);
                   }
 
@@ -162,6 +163,7 @@ public class Main {
   
                    
                 } else if(inputMenu == 2){
+                  //Cancelar Reserva feito por giovanaribeirodefrancisco - Giovana Ribeiro de Francisco
                   //Mostrar Reservas do Prestador
                   cancelarReserva.mostrarReservasPre(prestador);
                   System.out.println("\nDigite o numero da reserva: ");
