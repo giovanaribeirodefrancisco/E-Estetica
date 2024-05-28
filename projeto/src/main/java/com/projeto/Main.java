@@ -11,16 +11,19 @@ public class Main {
       ReservarCtr reservar = new ReservarCtr();
       CancelarReservaCtr cancelarReserva = new CancelarReservaCtr();
       PublicarServicoCtr publicarServico = new PublicarServicoCtr();
+
+      // PUBLICAR SERVIÇO FEITO POR Akina-Ino - Leila
       
-      Prestador p1 = new Prestador("João", 5);
-      publicarServico.adicionarServico("Manicure", 50, p1);
-      publicarServico.adicionarData("22/05", "8:00", "11:00", "Manicure", p1);
+      Prestador p1 = new Prestador("João", 5); //Adicionando Prestador João e sua Avaliação (5)
+      publicarServico.adicionarServico("Manicure", 50, p1); //Definindo Serviço e Preço
+      publicarServico.adicionarData("22/05", "8:00", "11:00", "Manicure", p1); // Definindo horários disponíveis
       
       
-      Contratante c1 = new Contratante("Carlos", 5);
-      Contratante c2 = new Contratante("Maria", 4);
-      Usuario usuario = new Usuario(); // lista de contratantes/prestador (usuario)
-      //
+      Contratante c1 = new Contratante("Carlos", 5); // Adicionando Contratante Carlos e Avaliação (5)
+      Contratante c2 = new Contratante("Maria", 4); // Adicionando Contratante Maria e Avaliação (4)
+      Usuario usuario = new Usuario(); // Lista de contratantes/prestador (usuario)
+      
+      //Adicicionando Contratantes e Prestadores 
       usuario.adicionaContratante(c1);
       usuario.adicionaContratante(c2);
       usuario.adicionaPrestador(p1);
