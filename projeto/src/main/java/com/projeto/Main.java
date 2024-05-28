@@ -93,6 +93,8 @@ public class Main {
                         }
                       }
                   }
+
+            //Cancelar Reserva feito por giovanaribeirodefrancisco - Giovana Ribeiro de Francisco
               else if(inputMenu == 2){
                 cancelarReserva.mostrarReservas(contratante);
                 System.out.println("\nDigite o numero da reserva: ");
@@ -124,7 +126,7 @@ public class Main {
           if (prestador.getNome().equals(usuarioDigitado)){
   
             int inputMenu = 0;
-  
+              //Menu Cancelar Reserva 
               while(inputMenu != 4){
                 System.out.println("\n1 - Publicar Serviço");
                 System.out.println("2 - Cancelar");
@@ -155,17 +157,19 @@ public class Main {
   
                    
                 } else if(inputMenu == 2){
-                  
+                  //Mostrar Reservas do Prestador
                   cancelarReserva.mostrarReservasPre(prestador);
                   System.out.println("\nDigite o numero da reserva: ");
                   int inputReserva = Integer.parseInt(System.console().readLine());
+                  //Cancelar Reserva do Prestador
                   cancelarReserva.cancelarReservaPre(prestador, inputReserva - 1);
 
                   System.out.println("\nReserva cancelada com sucesso");
   
                   
                 } else if(inputMenu == 3){
-                  
+
+                // Notificar prestador
                   for (String notificacao : prestador.notificacoes) {
                     System.out.println(notificacao);
                   }
