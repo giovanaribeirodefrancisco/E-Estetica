@@ -1,4 +1,4 @@
-//SERVIÇO FEITO POR Akina-Ino - Leila
+//Feito por Akina-Ino - Leila
 package com.projeto;
 
 
