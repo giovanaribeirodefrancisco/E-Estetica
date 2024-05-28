@@ -12,8 +12,6 @@ public class Main {
       CancelarReservaCtr cancelarReserva = new CancelarReservaCtr();
       PublicarServicoCtr publicarServico = new PublicarServicoCtr();
 
-      // PUBLICAR SERVIÇO FEITO POR Akina-Ino - Leila
-      
       Prestador p1 = new Prestador("João", 5); //Adicionando Prestador João e sua Avaliação (5)
       publicarServico.adicionarServico("Manicure", 50, p1); //Definindo Serviço e Preço
       publicarServico.adicionarData("22/05", "8:00", "11:00", "Manicure", p1); // Definindo horários disponíveis
@@ -130,32 +128,36 @@ public class Main {
   
             int inputMenu = 0;
               //Menu Cancelar Reserva 
+              
               while(inputMenu != 4){
                 System.out.println("\n1 - Publicar Serviço");
                 System.out.println("2 - Cancelar");
                 System.out.println("3 - Ver Notificações ("+ prestador.notificacoes.size()+")");
                 System.out.println("4 - Sair");
                 inputMenu = Integer.parseInt(System.console().readLine());
-                if(inputMenu == 1){
+                if(inputMenu == 1){   
+              // PUBLICAR SERVIÇO FEITO POR Akina-Ino - Leila
                   System.out.println("\nDigite o nome do serviço: ");
-                  String inputservico = System.console().readLine();
+                  String inputservico = System.console().readLine(); //Define o serviço prestado
                   System.out.println("\nDigite o valor: ");
-                  float valor = Float.parseFloat(System.console().readLine());
+                  float valor = Float.parseFloat(System.console().readLine()); //Define o valor do serviço
                   publicarServico.adicionarServico(inputservico, valor, prestador);
-                  System.out.println("\nDigite a quantidade de dias: ");
-                  int inputDias = Integer.parseInt(System.console().readLine());
+                  System.out.println("\nDigite a quantidade de dias: "); 
+                  int inputDias = Integer.parseInt(System.console().readLine()); // A quantidade de dias disponíveis
                   for(int j = 0; j < inputDias; j++){
                   System.out.println("\nDigite a data: ");
-                  String inputData = System.console().readLine();
-                  
+                  String inputData = System.console().readLine(); // As datas disponíveis
+                      
+                  //Define o horário de Serviço 
                   System.out.println("\nDigite o horario de inicio (00:00): ");
-                  String inputHorario = System.console().readLine();
+                  String inputHorario = System.console().readLine(); //
                   System.out.println("\nDigite o horario de fim (00:00): ");
                   String inputHorarioFim = System.console().readLine();
-                  
+                      
+                  //Adiciona as Datas e Horários definidos dentro da Agenda
                   publicarServico.adicionarData(inputData, inputHorario, inputHorarioFim, inputservico, prestador);
                   }
-                  
+
                   System.out.println("\nServiço publicado com sucesso!");
   
                    
