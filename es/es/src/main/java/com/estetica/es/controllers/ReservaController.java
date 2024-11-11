@@ -1,12 +1,9 @@
 package com.estetica.es.controllers;
 
-import com.estetica.es.dtos.ReservaDTO;
-import com.estetica.es.models.ReservaModel;
-import com.estetica.es.models.ServicoModel;
-import com.estetica.es.models.UsuarioModel;
-import com.estetica.es.services.ReservaService;
-import com.estetica.es.services.ServicoService;
-import com.estetica.es.services.UsuarioService;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +14,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import com.estetica.es.dtos.ReservaDTO;
+import com.estetica.es.models.ReservaModel;
+import com.estetica.es.models.ServicoModel;
+import com.estetica.es.models.UsuarioModel;
+import com.estetica.es.services.ReservaService;
+import com.estetica.es.services.ServicoService;
+import com.estetica.es.services.UsuarioService;
 
 @RestController
 @RequestMapping("/reservas")
@@ -38,9 +39,13 @@ public class ReservaController {
         Optional<ServicoModel> servico = servicoService.buscarServicoPorId(reservaDTO.getServicoId());
 
         if (usuario.isPresent() && servico.isPresent()) {
-            ReservaModel novaReserva = reservaService.criarReserva(usuario.get(), servico.get(), reservaDTO.getDataHora());
-            ReservaDTO reservaResponse = mapToDTO(novaReserva);
-            return new ResponseEntity<>(reservaResponse, HttpStatus.CREATED);
+            try {
+                ReservaModel novaReserva = reservaService.criarReserva(usuario.get(), servico.get(), reservaDTO.getDataHora());
+                ReservaDTO reservaResponse = mapToDTO(novaReserva);
+                return new ResponseEntity<>(reservaResponse, HttpStatus.CREATED);
+            } catch (IllegalArgumentException e) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
