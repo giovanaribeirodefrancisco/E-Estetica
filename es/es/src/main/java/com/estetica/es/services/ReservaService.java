@@ -19,6 +19,11 @@ public class ReservaService implements IReservaService {
     private ReservaRepository reservaRepository;
 
     public ReservaModel criarReserva(UsuarioModel usuario, ServicoModel servico, LocalDateTime dataHora) {
+        // Verifique se o usuário é do tipo CONTRATANTE
+        if (usuario.getTipo() != UsuarioModel.TipoUsuario.CONTRATANTE) {
+            throw new IllegalArgumentException("Apenas usuários do tipo CONTRATANTE podem criar reservas.");
+        }
+
         // Verifique se já existe uma reserva no mesmo horário para o mesmo serviço
         Optional<ReservaModel> conflitingReserva = reservaRepository.findByServicoAndDataHoraBetween(
                 servico, dataHora.minusMinutes(1), dataHora.plusMinutes(1));
