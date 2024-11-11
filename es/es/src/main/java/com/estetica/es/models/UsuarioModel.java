@@ -19,7 +19,12 @@ public class UsuarioModel implements IUsuario {
     private String nome;
 
     @Column(name = "tipo")
-    private String tipo;
+    @Enumerated(EnumType.STRING)
+    private TipoUsuario tipo;
+
+    public enum TipoUsuario {
+        CONTRATANTE, PRESTADOR
+    }
 
     public UsuarioModel() {
     }
