@@ -33,14 +33,20 @@ public class ServicoController {
 
     @PostMapping
     public ResponseEntity<ServicoDTO> criarServico(@RequestBody ServicoDTO servicoDTO) {
+        // Buscar os prestadores pelo ID
         Set<UsuarioModel> prestadores = servicoDTO.getPrestadoresId().stream()
                 .map(usuarioService::buscarUsuarioPorId)
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toSet());
-        ServicoModel novoServico = servicoService.criarServico(servicoDTO.getNome(), prestadores);
-        ServicoDTO servicoResponse = mapToDTO(novoServico);
-        return new ResponseEntity<>(servicoResponse, HttpStatus.CREATED);
+
+        try {
+            ServicoModel novoServico = servicoService.criarServico(servicoDTO.getNome(), prestadores);
+            ServicoDTO servicoResponse = mapToDTO(novoServico);
+            return new ResponseEntity<>(servicoResponse, HttpStatus.CREATED);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping
@@ -63,9 +69,13 @@ public class ServicoController {
     public ResponseEntity<ServicoDTO> atualizarServico(@PathVariable Integer id, @RequestBody ServicoDTO servicoDTO) {
         Optional<ServicoModel> servicoOptional = servicoService.buscarServicoPorId(id);
         if (servicoOptional.isPresent()) {
-            ServicoModel servicoAtualizado = servicoService.atualizarServico(mapToModel(servicoDTO));
-            ServicoDTO servicoResponse = mapToDTO(servicoAtualizado);
-            return new ResponseEntity<>(servicoResponse, HttpStatus.OK);
+            try {
+                ServicoModel servicoAtualizado = servicoService.atualizarServico(mapToModel(servicoDTO));
+                ServicoDTO servicoResponse = mapToDTO(servicoAtualizado);
+                return new ResponseEntity<>(servicoResponse, HttpStatus.OK);
+            } catch (IllegalArgumentException e) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -86,11 +96,15 @@ public class ServicoController {
     public ResponseEntity<List<ServicoDTO>> buscarServicosPorPrestador(@PathVariable Integer id) {
         Optional<UsuarioModel> prestador = usuarioService.buscarUsuarioPorId(id);
         if (prestador.isPresent()) {
-            List<ServicoModel> servicos = servicoService.buscarServicosPorPrestador(prestador.get());
-            List<ServicoDTO> servicosDTO = servicos.stream()
-                    .map(this::mapToDTO)
-                    .collect(Collectors.toList());
-            return new ResponseEntity<>(servicosDTO, HttpStatus.OK);
+            try {
+                List<ServicoModel> servicos = servicoService.buscarServicosPorPrestador(prestador.get());
+                List<ServicoDTO> servicosDTO = servicos.stream()
+                        .map(this::mapToDTO)
+                        .collect(Collectors.toList());
+                return new ResponseEntity<>(servicosDTO, HttpStatus.OK);
+            } catch (IllegalArgumentException e) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
