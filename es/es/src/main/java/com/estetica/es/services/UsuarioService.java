@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 
 import com.estetica.es.models.UsuarioModel;
+import com.estetica.es.models.UsuarioModel.TipoUsuario;
 import com.estetica.es.repositores.UusarioRepository;
 
 @Service
@@ -22,7 +23,7 @@ public class UsuarioService implements IService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    public UsuarioModel criarUsuario(String nome, String tipo) {
+    public UsuarioModel criarUsuario(String nome, TipoUsuario tipo) {
         UsuarioModel usuario = new UsuarioModel(nome, tipo);
         return usuarioRepository.save(usuario);
     }

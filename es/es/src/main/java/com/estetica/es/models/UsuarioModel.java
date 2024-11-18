@@ -2,6 +2,8 @@ package com.estetica.es.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -28,11 +30,11 @@ public class UsuarioModel implements IUsuario {
 
     public UsuarioModel() {
     }
-    public UsuarioModel(String nome, String tipo) {
+    public UsuarioModel(String nome, TipoUsuario tipo) {
         this.nome = nome;
         this.tipo = tipo;
     }
-    public UsuarioModel(Integer id, String nome, String tipo) {
+    public UsuarioModel(Integer id, String nome, TipoUsuario tipo) {
         this.id = id;
         this.nome = nome;
         this.tipo = tipo;
@@ -56,12 +58,12 @@ public class UsuarioModel implements IUsuario {
     }
 
     @Override
-    public void setTipo(String tipo){
+    public void setTipo(TipoUsuario tipo){
         this.tipo = tipo;
     }
 
     @Override
-    public String getTipo(){
+    public TipoUsuario getTipo(){
         return tipo;
     }
 
